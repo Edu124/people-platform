@@ -101,10 +101,11 @@
   .step.cur i { background: var(--ink); color: #fff; } .step.done, .step.cur { color: var(--ink); }
 
   .ring { position: relative; width: 132px; height: 132px; flex: none; }
-  .ring svg { transform: rotate(-90deg); }
-  .ring div { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; }
-  .ring strong { font-family: var(--serif); font-size: 32px; font-weight: 500; display: block; line-height: 1; }
-  .ring span { font-size: 11px; color: var(--muted); }
+  .ring svg { display: block; transform: rotate(-90deg); }
+  .ring > div { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; }
+  .ring > div > div { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .ring strong { font-family: var(--serif); font-size: 28px; font-weight: 500; display: block; line-height: 1; font-variant-numeric: tabular-nums; }
+  .ring span { display: block; font-size: 11px; line-height: 1.2; color: var(--muted); }
 
   .pillar-card { padding: 16px; display: flex; gap: 12px; align-items: flex-start; text-decoration: none; transition: transform .15s; }
   .pillar-card:hover { transform: translateY(-2px); }
