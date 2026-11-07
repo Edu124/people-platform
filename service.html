@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Service — Tenet People</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .crumbs { padding-top: 26px; font-size: 13px; color: var(--muted); }
+  .crumbs a { text-decoration: none; }
+  .s-hero { padding: 26px 0 0; display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: start; }
+  .s-hero h1 { font-size: clamp(34px, 4.4vw, 52px); margin: 14px 0 14px; }
+  .s-hero .lead { font-size: 19px; color: var(--ink-2); margin: 0 0 24px; }
+  .facts { padding: 22px; display: grid; gap: 18px; }
+  .facts small { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .1em; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
+  .facts ul { margin: 0; padding-left: 18px; color: var(--ink-2); font-size: 14px; display: grid; gap: 4px; }
+
+  .problem { padding: 26px; display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: start; border-left: 4px solid var(--red); }
+  .problem p { margin: 6px 0 0; color: var(--ink-2); font-size: 16px; }
+
+  .lines { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .line { padding: 22px; display: grid; gap: 10px; align-content: start; }
+  .line h3 { font-size: 18px; display: flex; gap: 10px; align-items: center; }
+  .line h3 .n { width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; font-size: 12px; font-weight: 700; flex: none; }
+  .line p { margin: 0; color: var(--ink-2); }
+  .line .get { background: var(--bg); border-radius: 10px; padding: 10px 12px; font-size: 13px; display: flex; gap: 8px; align-items: flex-start; }
+  .line .get .icon { width: 16px; height: 16px; color: var(--brand); margin-top: 1px; }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .list-card { padding: 24px; }
+  .list-card h3 { font-size: 17px; margin-bottom: 12px; }
+  .list-card ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .list-card li { display: flex; gap: 10px; align-items: flex-start; }
+  .list-card li .icon { color: var(--brand); width: 17px; height: 17px; margin-top: 2px; }
+
+  .pager { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 60px; }
+  .pager a { padding: 18px 20px; text-decoration: none; display: grid; gap: 4px; }
+  .pager small { color: var(--muted); font-size: 12px; }
+  .pager b { font-size: 16px; }
+  .pager a:last-child { text-align: right; }
+
+  @media (max-width: 900px) { .s-hero, .lines, .two { grid-template-columns: 1fr; } }
+  @media (max-width: 600px) { .problem { grid-template-columns: 1fr; } .pager { grid-template-columns: 1fr; } .pager a:last-child { text-align: left; } }
+</style>
+</head>
+<body data-page="service">
+<main class="wrap" id="main"></main>
+
+<script src="assets/icons.js"></script>
+<script src="assets/services.js"></script>
+<script src="assets/site.js"></script>
+<script>
+  const id = location.hash.slice(1) || new URLSearchParams(location.search).get('s');
+  addEventListener('hashchange', () => { location.reload(); scrollTo(0, 0); });
+  const idx = Math.max(0, PILLARS.findIndex(p => p.id === id));
+  const p = PILLARS[idx];
+  const prev = PILLARS[(idx + PILLARS.length - 1) % PILLARS.length], next = PILLARS[(idx + 1) % PILLARS.length];
+  document.title = `${p.name} — ${FIRM.name}`;
+  const c = p.color;
+
+  document.getElementById('main').innerHTML = `
+    <div class="crumbs"><a href="index.html#services">Services</a> / ${p.name}</div>
+
+    <section class="s-hero">
+      <div>
+        <span class="chip ${c}">${icon(p.icon)} Service ${idx + 1} of ${PILLARS.length}</span>
+        <h1 class="serif">${p.name}</h1>
+        <p class="lead">${p.short}</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn btn-brand" href="estimate.html#${p.id}">Estimate the cost for my organisation</a>
+          <a class="btn btn-ghost" href="app.html#${p.id}">See it in the client portal</a>
+        </div>
+      </div>
+      <div class="card facts">
+        <div><small>Best for</small><ul>${p.forWho.map(f => `<li>${f}</li>`).join('')}</ul></div>
+        <div><small>Fee models</small><div style="display:flex;gap:6px;flex-wrap:wrap">${p.pricing.map(m => `<span class="chip ${c}">${m.model}</span>`).join('')}</div></div>
+        <div><small>Service lines included</small><div style="font-weight:600">${p.lines.length} service lines, take all or only some</div></div>
+      </div>
+    </section>
+
+    <section class="block" style="padding-top:50px">
+      <div class="card problem"><span class="ic-sq c-red">${icon('alert')}</span>
+        <div><b style="font-size:17px">The problem we solve</b><p>${p.problem}</p></div></div>
+    </section>
+
+    <section class="block" style="padding-top:60px">
+      <div class="sec-head"><span class="eyebrow">What's included</span><h2 class="serif">What we do for you</h2>
+        <p>Each service line below can be taken on its own or bundled. For each one you can see what our team does and what you receive.</p></div>
+      <div class="lines">${p.lines.map((l, i) => `
+        <div class="card line">
+          <h3><span class="n c-${c}">${i + 1}</span>${l.name}</h3>
+          <p>${l.what}</p>
+          <div class="get">${icon('check')}<div><b>You get:</b> ${l.get}</div></div>
+        </div>`).join('')}</div>
+    </section>
+
+    <section class="block" style="padding-top:60px">
+      <div class="sec-head"><span class="eyebrow">How we deliver it</span><h2 class="serif">The delivery process</h2></div>
+      <div class="steps-row">${p.steps.map((s, i) => `<div class="card step-card"><span class="n">${i + 1}</span><h3>${s.t}</h3><p>${s.d}</p></div>`).join('')}</div>
+    </section>
+
+    <section class="block" style="padding-top:60px">
+      <div class="sec-head"><span class="eyebrow">How you pay</span><h2 class="serif">Fee models for this service</h2>
+        <p>Choose the model that fits how you budget. Examples are illustrative.</p></div>
+      <div class="price-grid">${p.pricing.map(m => `
+        <div class="card price"><span class="ic-sq c-${c}" style="width:36px;height:36px">${icon('rupee')}</span><h3>${m.model}</h3><p>${m.how}</p>
+          <div class="ex"><b>Example</b>${m.example}</div></div>`).join('')}</div>
+    </section>
+
+    <section class="block" style="padding-top:60px">
+      <div class="two">
+        <div class="card list-card"><h3>Results we measure and report</h3><ul>${p.kpis.map(k => `<li>${icon('target')}${k}</li>`).join('')}</ul></div>
+        <div class="card list-card"><h3>What you see in the client portal</h3><ul>${p.portal.map(k => `<li>${icon('check')}${k}</li>`).join('')}</ul>
+          <a class="btn btn-ghost btn-sm" style="margin-top:16px" href="app.html#${p.id}">Open this module in the demo ${icon('arrow')}</a></div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div><h2 class="serif">Get a proposal for ${p.name}</h2><p>Tell us your headcount and sites and we'll show an indicative fee for each model.</p></div>
+      <div class="actions"><a class="btn btn-light" href="estimate.html#${p.id}">Estimate my cost</a></div>
+    </section>
+
+    <nav class="pager">
+      <a class="card" href="service.html#${prev.id}"><small>← Previous service</small><b>${prev.name}</b></a>
+      <a class="card" href="service.html#${next.id}"><small>Next service →</small><b>${next.name}</b></a>
+    </nav>`;
+</script>
+</body>
+</html>

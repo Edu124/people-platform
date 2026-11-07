@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tenet People — People solutions for growing organisations</title>
+<meta name="description" content="Seven people services (HR operations, hiring, compliance, organisation design, learning, rewards and HR technology) delivered by experts and tracked in one client portal.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .hero { padding: 64px 0 10px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 50px; align-items: center; }
+  .hero h1 { font-size: clamp(36px, 5vw, 58px); margin: 14px 0 18px; }
+  .hero h1 em { font-style: italic; color: var(--brand); }
+  .hero .lead { font-size: 18px; color: var(--ink-2); margin: 0 0 26px; max-width: 560px; }
+  .hero .ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .model { padding: 22px; display: grid; gap: 10px; }
+  .model-row { display: flex; gap: 14px; align-items: flex-start; padding: 14px; border-radius: 12px; background: var(--bg); }
+  .model-row b { display: block; font-size: 15px; }
+  .model-row span { color: var(--ink-2); font-size: 13px; }
+  .model-arrow { text-align: center; color: var(--muted); font-size: 18px; line-height: 1; }
+  .model h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+
+  .outcomes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .outcome { padding: 22px; }
+  .outcome h3 { font-size: 17px; margin: 14px 0 6px; }
+  .outcome p { margin: 0; color: var(--ink-2); font-size: 14px; }
+
+  .svc-list { display: grid; gap: 14px; }
+  .svc { display: grid; grid-template-columns: 56px 1.3fr 1.6fr 1fr; gap: 22px; padding: 24px; align-items: start; text-decoration: none; transition: box-shadow .2s, transform .2s; }
+  .svc:hover { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(15,27,45,.06), 0 14px 32px rgba(15,27,45,.09); }
+  .svc .num { font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: .1em; }
+  .svc h3 { font-family: var(--serif); font-weight: 500; font-size: 23px; margin: 4px 0 8px; }
+  .svc p { margin: 0; color: var(--ink-2); font-size: 14px; }
+  .svc .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; font-weight: 700; color: var(--muted); margin-bottom: 8px; display: block; }
+  .svc ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; font-size: 13.5px; }
+  .svc li { display: flex; gap: 7px; align-items: flex-start; }
+  .svc li .icon { width: 15px; height: 15px; color: var(--brand); margin-top: 2px; }
+  .svc .more { margin-top: 14px; display: inline-flex; gap: 6px; align-items: center; font-weight: 600; font-size: 13px; color: var(--brand); }
+  .svc .more .icon { width: 15px; height: 15px; }
+
+  .life { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
+  .life > div { padding: 22px; border-left: 1px solid var(--line); }
+  .life > div:first-child { border-left: 0; }
+  .life h3 { font-family: var(--serif); font-weight: 500; font-size: 24px; margin: 4px 0 6px; }
+  .life p { color: var(--ink-2); font-size: 14px; margin: 0 0 12px; }
+  .life a { display: block; font-size: 13px; font-weight: 600; text-decoration: none; padding: 3px 0; color: var(--brand); }
+
+  .ptable { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .ptable th, .ptable td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .ptable th { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); background: var(--bg); }
+  .ptable td:first-child { font-weight: 600; }
+  .ptable tr:last-child td { border-bottom: 0; }
+  .ptable .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ptable .ex { color: var(--ink-2); font-size: 13px; }
+
+  .portal { display: grid; grid-template-columns: 1fr 1.1fr; gap: 40px; align-items: center; }
+  .portal ul { list-style: none; padding: 0; margin: 18px 0 24px; display: grid; gap: 12px; }
+  .portal li { display: flex; gap: 12px; align-items: flex-start; }
+  .portal li b { display: block; }
+  .portal li span { color: var(--ink-2); font-size: 14px; }
+  .shot { padding: 0; overflow: hidden; }
+  .shot-top { background: var(--ink); color: #fff; padding: 10px 14px; font-size: 12px; display: flex; gap: 6px; align-items: center; }
+  .shot-top i { width: 9px; height: 9px; border-radius: 50%; background: #3a4a63; display: inline-block; }
+  .shot-body { padding: 16px; display: grid; gap: 10px; }
+  .shot-explain { background: var(--brand-soft); border-radius: 10px; padding: 12px; font-size: 13px; color: #0e4a38; }
+  .shot-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; font-size: 13px; gap: 10px; }
+
+  .reveal { transition: transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-width: 1000px) {
+    .svc { grid-template-columns: 48px 1fr; }
+    .svc > :nth-child(3), .svc > :nth-child(4) { grid-column: 2; }
+  }
+  @media (max-width: 900px) {
+    .hero, .portal { grid-template-columns: 1fr; }
+    .outcomes, .life { grid-template-columns: 1fr 1fr; }
+    .life > div:nth-child(3) { border-left: 0; }
+    .life > div:nth-child(n+3) { border-top: 1px solid var(--line); }
+  }
+  @media (max-width: 600px) {
+    .outcomes, .life { grid-template-columns: 1fr; }
+    .life > div { border-left: 0; border-top: 1px solid var(--line); }
+    .life > div:first-child { border-top: 0; }
+    .svc { grid-template-columns: 1fr; padding: 20px; }
+    .svc > * { grid-column: 1 !important; }
+    .svc ul { grid-template-columns: 1fr; }
+    .ptable th:nth-child(3), .ptable td:nth-child(3) { display: none; }
+  }
+</style>
+</head>
+<body data-page="home">
+<main class="wrap">
+
+  <!-- 1. What we are -->
+  <section class="hero">
+    <div>
+      <span class="eyebrow">People solutions for growing organisations</span>
+      <h1 class="serif">We <em>run, fix and grow</em> your people function.</h1>
+      <p class="lead">We offer seven people services, from payroll and hiring to compliance, training and pay design. Our specialists do the work for your organisation, and you follow every step in one client portal.</p>
+      <div class="ctas">
+        <a class="btn btn-brand" href="#services">See our 7 services</a>
+        <a class="btn btn-ghost" href="estimate.html">Build your plan &amp; estimate</a>
+      </div>
+    </div>
+    <div class="card model reveal">
+      <h3>How it works for your organisation</h3>
+      <div class="model-row"><span class="ic-sq c-gold" id="m1"></span><div><b>1. You pick the services you need</b><span>One service or all seven. Each has a clear scope and a fee model.</span></div></div>
+      <div class="model-arrow">↓</div>
+      <div class="model-row"><span class="ic-sq c-green" id="m2"></span><div><b>2. Our specialists do the work</b><span>Payroll experts, recruiters, compliance and OD consultants, and trainers.</span></div></div>
+      <div class="model-arrow">↓</div>
+      <div class="model-row"><span class="ic-sq c-blue" id="m3"></span><div><b>3. You see everything in your portal</b><span>Approvals, progress, reports and results, live, so nothing is a black box.</span></div></div>
+    </div>
+  </section>
+
+  <!-- 2. Why -->
+  <section class="block">
+    <div class="sec-head reveal">
+      <span class="eyebrow">What changes for you</span>
+      <h2 class="serif">Four results every service works towards</h2>
+    </div>
+    <div class="outcomes" id="outcomes"></div>
+  </section>
+
+  <!-- 3. Services -->
+  <section class="block" id="services">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Our services</span>
+      <h2 class="serif">Seven services, each with a clear scope and fee</h2>
+      <p>Each card shows what we do for you and how you pay. Open a service for the full detail: what's included, how we deliver it, pricing examples and the results we measure.</p>
+    </div>
+    <div class="svc-list" id="svcList"></div>
+  </section>
+
+  <!-- 4. Lifecycle -->
+  <section class="block">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Where each service fits</span>
+      <h2 class="serif">Covering the whole employee journey</h2>
+    </div>
+    <div class="life reveal" id="life"></div>
+  </section>
+
+  <!-- 5. How we work -->
+  <section class="block" id="how">
+    <div class="sec-head reveal">
+      <span class="eyebrow">How we work with you</span>
+      <h2 class="serif">From first call to monthly delivery</h2>
+    </div>
+    <div class="steps-row" id="process"></div>
+  </section>
+
+  <!-- 6. Pricing -->
+  <section class="block" id="pricing">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Pricing models</span>
+      <h2 class="serif">How you pay for each service</h2>
+      <p>Each service comes with the fee models that suit that kind of work. You choose the one that fits your budget, and can switch as you grow.</p>
+    </div>
+    <div class="card reveal" style="overflow:hidden"><table class="ptable" id="ptable"></table></div>
+    <p class="note-inline" style="margin-top:10px">Example amounts are illustrative. Your proposal is priced on your actual headcount, sites and scope.</p>
+  </section>
+
+  <!-- 7. Software -->
+  <section class="block">
+    <div class="portal">
+      <div class="reveal">
+        <span class="eyebrow">The software behind the service</span>
+        <h2 class="serif" style="font-size:clamp(28px,3.4vw,40px);margin:10px 0 0">Your client portal: see the work as it happens</h2>
+        <ul>
+          <li><span class="ic-sq c-green" id="p1"></span><div><b>Approve, don't chase</b><span>Payroll, leave, offers and new hiring requests come to you for one-click approval.</span></div></li>
+          <li><span class="ic-sq c-red" id="p2"></span><div><b>Know your risk</b><span>A live compliance calendar and audit-readiness score for every site.</span></div></li>
+          <li><span class="ic-sq c-blue" id="p3"></span><div><b>Measure results</b><span>Each service reports the KPIs we promised, every month.</span></div></li>
+        </ul>
+        <a class="btn btn-primary" href="app.html">Take the guided portal demo</a>
+      </div>
+      <div class="card shot reveal">
+        <div class="shot-top"><i></i><i></i><i></i>&nbsp; Client portal · Compliance &amp; Risk</div>
+        <div class="shot-body">
+          <div class="shot-explain"><b>What our team does here:</b> files PF, ESI, PT and TDS on time and keeps evidence. <b>What you do:</b> check status, download proof.</div>
+          <div class="shot-row"><span>PF return – October</span><span class="chip amber">Due in 9 days</span></div>
+          <div class="shot-row"><span>Contractor register – Chakan</span><span class="chip red">Being fixed by our team</span></div>
+          <div class="shot-row"><span>Bonus register – Form C</span><span class="chip green">Filed · proof saved</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band reveal">
+    <div>
+      <h2 class="serif">Not sure which services you need?</h2>
+      <p>Answer a few questions about your organisation and get a recommended set of services with an indicative monthly cost.</p>
+    </div>
+    <div class="actions">
+      <a class="btn btn-light" href="estimate.html">Build your plan</a>
+      <a class="btn btn-ghost btn-outline-light" href="app.html">See the portal</a>
+    </div>
+  </section>
+</main>
+
+<script src="assets/icons.js"></script>
+<script src="assets/services.js"></script>
+<script src="assets/site.js"></script>
+<script>
+  const $ = s => document.querySelector(s);
+  [['#m1', 'layers'], ['#m2', 'users'], ['#m3', 'chart'], ['#p1', 'check'], ['#p2', 'shield'], ['#p3', 'target']].forEach(([s, i]) => $(s).innerHTML = icon(i));
+
+  $('#outcomes').innerHTML = FIRM.outcomes.map(o => `<div class="card outcome reveal"><span class="ic-sq c-green">${icon(o.icon)}</span><h3>${o.t}</h3><p>${o.d}</p></div>`).join('');
+
+  $('#svcList').innerHTML = PILLARS.map((p, i) => `
+    <a class="card svc reveal" href="service.html#${p.id}">
+      <span class="ic-sq c-${p.color}" style="width:52px;height:52px">${icon(p.icon)}</span>
+      <div><span class="num">SERVICE ${String(i + 1).padStart(2, '0')}</span><h3>${p.name}</h3><p>${p.short}</p>
+        <span class="more">Full service details ${icon('arrow')}</span></div>
+      <div><span class="lbl">What we do for you</span><ul>${p.lines.map(l => `<li>${icon('check')}${l.name}</li>`).join('')}</ul></div>
+      <div><span class="lbl">How you pay</span><div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">${p.pricing.map(m => `<span class="chip">${m.model}</span>`).join('')}</div></div>
+    </a>`).join('');
+
+  const by = id => PILLARS.find(p => p.id === id);
+  $('#life').innerHTML = [
+    ['Acquire', 'Find and bring in the right people.', ['talent']],
+    ['Manage', 'Pay, support and keep them compliant.', ['hrms', 'compliance']],
+    ['Develop', 'Grow their skills, pay and careers.', ['learning', 'rewards']],
+    ['Transform', 'Reshape the organisation with data.', ['od', 'tech']],
+  ].map(([t, d, ids]) => `<div><span class="eyebrow" style="color:var(--gold)">Stage</span><h3>${t}</h3><p>${d}</p>${ids.map(id => `<a href="service.html#${id}">→ ${by(id).name}</a>`).join('')}</div>`).join('');
+
+  $('#process').innerHTML = FIRM.process.map((s, i) => `<div class="card step-card reveal"><span class="n">${i + 1}</span><h3>${s.t}</h3><p>${s.d}</p></div>`).join('');
+
+  $('#ptable').innerHTML = `<thead><tr><th>Service</th><th>Fee models you can choose</th><th>Example</th></tr></thead><tbody>` +
+    PILLARS.map(p => `<tr><td><a href="service.html#${p.id}" style="text-decoration:none">${p.name}</a></td>
+      <td><div class="chips">${p.pricing.map(m => `<span class="chip ${p.color}" title="${m.how.replace(/"/g, '&quot;')}">${m.model}</span>`).join('')}</div></td>
+      <td class="ex">${p.pricing[0].example}</td></tr>`).join('') + '</tbody>';
+
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

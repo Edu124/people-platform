@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build your plan — Tenet People</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .head { padding: 44px 0 26px; max-width: 760px; }
+  .head h1 { font-size: clamp(32px, 4vw, 46px); margin: 10px 0 10px; }
+  .head p { color: var(--ink-2); font-size: 17px; margin: 0; }
+  .layout { display: grid; grid-template-columns: 1fr 380px; gap: 22px; align-items: start; }
+  .stepbox { padding: 24px; margin-bottom: 16px; }
+  .stepbox > h2 { font-size: 18px; display: flex; gap: 10px; align-items: center; margin-bottom: 4px; }
+  .stepbox > h2 .n { width: 26px; height: 26px; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; font-size: 12px; }
+  .stepbox > p { color: var(--muted); margin: 0 0 16px; font-size: 14px; }
+  .fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .field { display: grid; gap: 5px; }
+  .field label { font-size: 12px; font-weight: 600; color: var(--ink-2); }
+  .field input, .field select { padding: 10px 12px; border: 1px solid var(--line); border-radius: 9px; background: var(--bg); width: 100%; }
+  .field input:focus, .field select:focus { outline: 2px solid var(--brand-2); outline-offset: -1px; }
+  .pains { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .pain { display: flex; gap: 10px; align-items: flex-start; padding: 12px; border: 1px solid var(--line); border-radius: 10px; cursor: pointer; font-size: 14px; background: var(--surface); }
+  .pain:has(input:checked) { border-color: var(--brand-2); background: var(--brand-soft); }
+  .pain input { margin-top: 3px; accent-color: var(--brand); }
+
+  .svc { border: 1px solid var(--line); border-radius: 12px; margin-bottom: 10px; overflow: hidden; }
+  .svc.on { border-color: var(--brand-2); box-shadow: 0 0 0 1px var(--brand-2) inset; }
+  .svc-top { display: flex; gap: 12px; align-items: center; padding: 14px 16px; cursor: pointer; }
+  .svc-top input { width: 18px; height: 18px; accent-color: var(--brand); flex: none; }
+  .svc-top .t { flex: 1; min-width: 0; }
+  .svc-top .t b { display: block; }
+  .svc-top .t span { font-size: 13px; color: var(--muted); }
+  .rec { font-size: 11px; font-weight: 700; color: var(--brand); background: var(--brand-soft); padding: 2px 8px; border-radius: 99px; margin-left: 6px; vertical-align: 1px; }
+  .svc-body { display: none; padding: 4px 16px 16px 46px; }
+  .svc.on .svc-body { display: block; }
+  .svc-body .how { font-size: 13px; color: var(--ink-2); background: var(--bg); border-radius: 9px; padding: 10px 12px; margin-top: 10px; }
+
+  .summary { position: sticky; top: 86px; padding: 22px; }
+  .summary h2 { font-family: var(--serif); font-weight: 500; font-size: 22px; margin-bottom: 4px; }
+  .sum-row { display: flex; justify-content: space-between; gap: 10px; padding: 10px 0; border-top: 1px solid var(--line); font-size: 14px; }
+  .sum-row span { color: var(--ink-2); }
+  .sum-row small { display: block; color: var(--muted); font-size: 12px; }
+  .totals { background: var(--ink); color: #fff; border-radius: 12px; padding: 16px; margin-top: 14px; display: grid; gap: 8px; }
+  .totals div { display: flex; justify-content: space-between; font-size: 14px; }
+  .totals .big { font-family: var(--serif); font-size: 24px; border-top: 1px solid #2e3d55; padding-top: 10px; margin-top: 4px; }
+  .empty { color: var(--muted); padding: 18px 0; font-size: 14px; }
+
+  @media (max-width: 960px) { .layout { grid-template-columns: 1fr; } .summary { position: static; } }
+  @media (max-width: 600px) { .fields, .pains { grid-template-columns: 1fr; } .svc-body { padding-left: 16px; } }
+  @media print { header.nav, footer.foot, .no-print { display: none !important; } .layout { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body data-page="estimate">
+<main class="wrap">
+  <div class="head">
+    <span class="eyebrow">Build your plan</span>
+    <h1 class="serif">Which services do you need, and what will they cost?</h1>
+    <p>Three quick steps. We recommend services based on your challenges, then show an indicative fee for each service using the pricing model you choose.</p>
+  </div>
+
+  <div class="layout">
+    <div>
+      <div class="card stepbox">
+        <h2><span class="n">1</span>About your organisation</h2>
+        <p>Used to size the fees.</p>
+        <div class="fields">
+          <div class="field"><label for="emp">Employees on payroll</label><input id="emp" type="number" min="1" value="300"></div>
+          <div class="field"><label for="sites">Sites / locations</label><input id="sites" type="number" min="1" value="3"></div>
+          <div class="field"><label for="ind">Industry</label><select id="ind"><option>Manufacturing</option><option>Services / IT</option><option>Retail &amp; distribution</option><option>Healthcare</option><option>Other</option></select></div>
+        </div>
+      </div>
+
+      <div class="card stepbox">
+        <h2><span class="n">2</span>What challenges are you facing?</h2>
+        <p>Tick all that apply. We'll mark the matching services as recommended.</p>
+        <div class="pains" id="pains"></div>
+      </div>
+
+      <div class="card stepbox">
+        <h2><span class="n">3</span>Choose services and fee models</h2>
+        <p>Tick a service to include it, then pick how you'd like to pay.</p>
+        <div id="svcs"></div>
+      </div>
+    </div>
+
+    <aside class="card summary" id="summary"></aside>
+  </div>
+</main>
+
+<script src="assets/icons.js"></script>
+<script src="assets/services.js"></script>
+<script src="assets/site.js"></script>
+<script>
+  const $ = s => document.querySelector(s);
+  const inr = n => '₹' + Math.round(n).toLocaleString('en-IN');
+  const R = RATES;
+
+  const PAINS = [
+    ['hrms', 'Payroll and HR admin take up too much of our time'],
+    ['talent', 'We need to hire many people, or senior leaders'],
+    ['compliance', 'We worry about labour law compliance or contractor labour'],
+    ['od', 'Our structure or roles no longer fit how we work'],
+    ['learning', 'Supervisors and managers need people skills'],
+    ['rewards', 'Pay decisions are ad hoc, or people leave over pay'],
+    ['tech', 'HR data is in Excel and we have no dashboards'],
+  ];
+  $('#pains').innerHTML = PAINS.map(([id, t]) => `<label class="pain"><input type="checkbox" data-pain="${id}">${t}</label>`).join('');
+
+  // Per-service configuration: options (fee models) + extra inputs + calc → {monthly, oneTime, usage, note}
+  const CFG = {
+    hrms: {
+      models: [['pepmC', 'Per employee / month: Complete (all 6 lines)'], ['pepmE', 'Per employee / month: Essentials (payroll + attendance)'], ['retainer', 'Monthly retainer'], ['txn', 'Transaction fee only']],
+      inputs: m => m === 'txn' ? [['txn', 'Joinings + exits per month', 10]] : [],
+      calc: (m, v, emp) => m === 'pepmC' ? { monthly: emp * R.hrms.complete, note: `${emp} employees × ${inr(R.hrms.complete)}` }
+        : m === 'pepmE' ? { monthly: emp * R.hrms.essentials, note: `${emp} employees × ${inr(R.hrms.essentials)}` }
+        : m === 'retainer' ? { monthly: Math.max(R.hrms.retainerMin, emp * R.hrms.retainerPerEmp), note: 'Flat fee for your headcount band' }
+        : { monthly: v.txn * R.hrms.perTransaction, note: `${v.txn} events × ${inr(R.hrms.perTransaction)}` },
+    },
+    talent: {
+      models: [['placement', 'Placement fee (% of CTC, on joining)'], ['perhire', 'Per-hire fee (volume roles)'], ['rpo', 'Monthly RPO team']],
+      inputs: m => m === 'placement' ? [['hires', 'Hires per year', 10], ['ctc', 'Average annual CTC (₹)', 1200000]] : m === 'perhire' ? [['hires', 'Hires per year', 40]] : [],
+      calc: (m, v) => m === 'placement' ? { usage: v.hires * v.ctc * R.talent.placementPct, note: `${v.hires} hires × 8.33% of ${inr(v.ctc)}` }
+        : m === 'perhire' ? { usage: v.hires * R.talent.perHire, note: `${v.hires} hires × ${inr(R.talent.perHire)}` }
+        : { monthly: R.talent.rpoMonthly, note: 'Dedicated 3-recruiter team' },
+    },
+    compliance: {
+      models: [['site', 'Per site, per month'], ['retainer', 'Monthly retainer']],
+      inputs: () => [['diag', 'Add a one-time compliance diagnostic? (1 = yes, 0 = no)', 1]],
+      calc: (m, v, emp, sites) => ({ monthly: m === 'site' ? sites * R.compliance.perSite : R.compliance.retainer, oneTime: v.diag ? R.compliance.diagnostic : 0,
+        note: (m === 'site' ? `${sites} sites × ${inr(R.compliance.perSite)}` : 'Flat monthly retainer') + (v.diag ? ' + diagnostic' : '') }),
+    },
+    od: {
+      models: [['focused', 'Project fee: one business unit'], ['enterprise', 'Project fee: whole organisation'], ['retainer', 'OD retainer (monthly)']],
+      inputs: () => [],
+      calc: m => m === 'retainer' ? { monthly: R.od.retainer, note: 'Ongoing OD partner' } : { oneTime: R.od[m], note: m === 'focused' ? 'Design for one unit' : 'Organisation-wide transformation' },
+    },
+    learning: {
+      models: [['pp', 'Per participant'], ['cohort', 'Cohort fee'], ['annual', 'Annual contract (6 cohorts)']],
+      inputs: m => m === 'pp' ? [['n', 'Participants per year', 50]] : m === 'cohort' ? [['n', 'Cohorts per year', 2]] : [],
+      calc: (m, v) => m === 'pp' ? { usage: v.n * R.learning.perParticipant, note: `${v.n} participants × ${inr(R.learning.perParticipant)}` }
+        : m === 'cohort' ? { usage: v.n * R.learning.cohort, note: `${v.n} cohorts × ${inr(R.learning.cohort)}` }
+        : { usage: R.learning.annual, note: 'Committed yearly programme calendar' },
+    },
+    rewards: {
+      models: [['project', 'Consulting project'], ['retainer', 'Retainer (monthly)']],
+      inputs: () => [],
+      calc: m => m === 'project' ? { oneTime: R.rewards.project, note: 'Job evaluation + salary bands' } : { monthly: R.rewards.retainer, note: 'Ongoing reward advisory' },
+    },
+    tech: {
+      models: [['both', 'Implementation + recurring support'], ['impl', 'Implementation only']],
+      inputs: () => [],
+      calc: m => ({ oneTime: R.tech.implementation, monthly: m === 'both' ? R.tech.support : 0, note: m === 'both' ? 'Set-up, then monthly support' : 'One-time set-up' }),
+    },
+  };
+
+  // which entry in the service's pricing list explains each fee model
+  const HOW = { hrms: { pepmC: 0, pepmE: 0, retainer: 1, txn: 2 }, talent: { placement: 0, perhire: 1, rpo: 2 }, compliance: { site: 1, retainer: 0 },
+    od: { focused: 0, enterprise: 0, retainer: 1 }, learning: { pp: 0, cohort: 1, annual: 2 }, rewards: { project: 0, retainer: 1 }, tech: { both: 1, impl: 0 } };
+
+  const S = { on: {}, model: {}, vals: {} };
+  const pre = location.hash.slice(1) || new URLSearchParams(location.search).get('add');
+  if (pre && CFG[pre]) S.on[pre] = true;
+  PILLARS.forEach(p => { S.model[p.id] = CFG[p.id].models[0][0]; S.vals[p.id] = {}; });
+
+  function renderServices() {
+    const recs = new Set([...document.querySelectorAll('[data-pain]:checked')].map(i => i.dataset.pain));
+    $('#svcs').innerHTML = PILLARS.map(p => {
+      const cfg = CFG[p.id], m = S.model[p.id];
+      const inputs = cfg.inputs(m).map(([k, label, def]) => {
+        if (S.vals[p.id][k] === undefined) S.vals[p.id][k] = def;
+        return `<div class="field"><label>${label}</label><input type="number" min="0" data-val="${p.id}:${k}" value="${S.vals[p.id][k]}"></div>`;
+      }).join('');
+      const how = p.pricing[HOW[p.id][m]] || p.pricing[0];
+      return `<div class="svc ${S.on[p.id] ? 'on' : ''}">
+        <label class="svc-top"><input type="checkbox" data-on="${p.id}" ${S.on[p.id] ? 'checked' : ''}>
+          <span class="ic-sq c-${p.color}" style="width:36px;height:36px">${icon(p.icon)}</span>
+          <span class="t"><b>${p.name}${recs.has(p.id) ? '<span class="rec">Recommended</span>' : ''}</b><span>${p.short}</span></span></label>
+        <div class="svc-body">
+          <div class="fields" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+            <div class="field"><label>Fee model</label><select data-model="${p.id}">${cfg.models.map(([k, l]) => `<option value="${k}" ${k === m ? 'selected' : ''}>${l}</option>`).join('')}</select></div>
+            ${inputs}
+          </div>
+          <div class="how"><b>${how.model}:</b> ${how.how} <a href="service.html#${p.id}">What's included →</a></div>
+        </div></div>`;
+    }).join('');
+    renderSummary();
+  }
+
+  function renderSummary() {
+    const emp = Math.max(1, +$('#emp').value || 1), sites = Math.max(1, +$('#sites').value || 1);
+    let monthly = 0, oneTime = 0, usage = 0;
+    const rows = PILLARS.filter(p => S.on[p.id]).map(p => {
+      const r = CFG[p.id].calc(S.model[p.id], S.vals[p.id], emp, sites);
+      monthly += r.monthly || 0; oneTime += r.oneTime || 0; usage += r.usage || 0;
+      const parts = [r.monthly ? inr(r.monthly) + '/mo' : '', r.oneTime ? inr(r.oneTime) + ' one-time' : '', r.usage ? inr(r.usage) + '/yr' : ''].filter(Boolean).join(' + ');
+      return `<div class="sum-row"><div><b>${p.name}</b><small>${r.note}</small></div><span style="text-align:right;white-space:nowrap">${parts || '₹0'}</span></div>`;
+    });
+    $('#summary').innerHTML = `<h2>Your indicative plan</h2><p class="note-inline" style="margin:0 0 12px">${emp} employees · ${sites} sites · ${$('#ind').value}</p>
+      ${rows.join('') || '<p class="empty">Tick a service on the left to see its cost here.</p>'}
+      ${rows.length ? `<div class="totals">
+        <div><span>Monthly recurring</span><b>${inr(monthly)}</b></div>
+        <div><span>One-time projects</span><b>${inr(oneTime)}</b></div>
+        <div><span>Usage-based (per year)</span><b>${inr(usage)}</b></div>
+        <div class="big"><span>First-year total</span><span>${inr(monthly * 12 + oneTime + usage)}</span></div>
+      </div>
+      <p class="note-inline" style="margin:10px 0 14px">Indicative only, excluding GST. Final pricing follows a free diagnostic.</p>
+      <div class="no-print" style="display:grid;gap:8px"><a class="btn btn-primary" href="index.html#how">See how we would start</a>
+      <a class="btn btn-ghost" href="app.html">See how we'd deliver it in the portal</a></div>` : ''}`;
+  }
+
+  document.addEventListener('change', e => {
+    const t = e.target;
+    if (t.dataset.on) { S.on[t.dataset.on] = t.checked; renderServices(); }
+    else if (t.dataset.model) { S.model[t.dataset.model] = t.value; renderServices(); }
+    else if (t.dataset.pain) {
+      if (t.checked) S.on[t.dataset.pain] = true;
+      renderServices();
+    }
+  });
+  document.addEventListener('input', e => {
+    const t = e.target;
+    if (t.dataset.val) { const [id, k] = t.dataset.val.split(':'); S.vals[id][k] = Math.max(0, +t.value || 0); renderSummary(); }
+    else if (['emp', 'sites', 'ind'].includes(t.id)) renderSummary();
+  });
+  renderServices();
+</script>
+</body>
+</html>
