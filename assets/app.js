@@ -1,4 +1,4 @@
-/* Tenet People — workspace app (vanilla JS, hash-routed, local demo state) */
+/* Nakshatra People — workspace app (vanilla JS, hash-routed, local demo state) */
 (() => {
   const TODAY = new Date('2026-11-06T00:00:00');
   const KEY = 'tenet-people-demo-v1';
@@ -442,7 +442,7 @@
     renderNav(id);
     $('#view').innerHTML = V[id]();
     const lk = $('#lk'); if (lk) lk.innerHTML = icon('lock', 'icon');
-    document.title = (ROUTES.find(r => r.id === id)?.name || 'Workspace') + ' · Tenet People';
+    document.title = (ROUTES.find(r => r.id === id)?.name || 'Workspace') + ' · Nakshatra People';
     bind(id);
   }
   const rerender = () => { save(); route(); };

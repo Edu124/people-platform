@@ -4,7 +4,7 @@
   const header = document.createElement('header');
   header.className = 'nav';
   header.innerHTML = `<div class="wrap nav-in">
-    <a class="logo" href="index.html"><span class="logo-mark">T</span> ${FIRM.name.split(' ')[0]} <small>${FIRM.name.split(' ').slice(1).join(' ')}</small></a>
+    <a class="logo" href="index.html"><span class="logo-mark">${FIRM.name[0]}</span> ${FIRM.name.split(' ')[0]} <small>${FIRM.name.split(' ').slice(1).join(' ')}</small></a>
     <nav class="nav-links">
       <div class="drop"><button type="button">Services ${icon('arrow', 'icon')}</button>
         <div class="card drop-menu">${PILLARS.map(p => `<a href="service.html#${p.id}" style="text-decoration:none"><span class="ic c-${p.color}">${icon(p.icon)}</span>${p.name}</a>`).join('')}</div></div>

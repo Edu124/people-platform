@@ -4,7 +4,7 @@
 // Prices are ILLUSTRATIVE placeholders — edit them here to match your rate card.
 // =====================================================================
 window.FIRM = {
-  name: 'Tenet People',
+  name: 'Nakshatra People',
   promise: 'We run, fix and grow your people function, and our software lets you see every step.',
   outcomes: [
     { icon: 'shield', t: 'Compliance', d: 'Every filing, register and licence handled on time, with evidence ready for any inspection.' },
